@@ -80,7 +80,6 @@ app.use(session(sessionConfig));
 app.use(flash());
 app.use(helmet({ contentSecurityPolicy: false }));
 
-
 const scriptSrcUrls = [
     "https://stackpath.bootstrapcdn.com/",
     "https://api.tiles.mapbox.com/",
@@ -118,14 +117,13 @@ app.use(
                 "'self'",
                 "blob:",
                 "data:",
-                `https://res.cloudinary.com/${process.env.CLOUDINARY_CLOUD_NAME}/`, 
+                `https://res.cloudinary.com/${process.env.CLOUDINARY_CLOUD_NAME}/`,
                 "https://images.unsplash.com/",
             ],
             fontSrc: ["'self'", ...fontSrcUrls],
         },
     })
 );
-
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -134,23 +132,21 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+// ✅ FIX: Always define currentUser so EJS never crashes
 app.use((req, res, next) => {
-    res.locals.currentUser = req.user; // req.user is user infomation in session that passport define for us
-    res.locals.success = req.flash('success'); // message when success is invoked in route handler
+    res.locals.currentUser = typeof req.user !== 'undefined' ? req.user : null;
+    res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
     next();
-})
-
+});
 
 app.use('/', userRoutes);
 app.use('/campgrounds', campgroundRoutes)
 app.use('/campgrounds/:id/reviews', reviewRoutes)
 
-
 app.get('/', (req, res) => {
     res.render('home')
 });
-
 
 app.all('*', (req, res, next) => {
     next(new ExpressError('Page Not Found', 404))
@@ -166,5 +162,3 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => {
     console.log(`Serving on port ${port}`)
 })
-
-
