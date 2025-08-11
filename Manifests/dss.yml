@@ -5,11 +5,11 @@ metadata:
   name: yelp-camp-secrets
 type: Opaque
 data:
-  CLOUDINARY_CLOUD_NAME: ZGhxdnlyMXZoCg==
-  CLOUDINARY_KEY: MzIyNjMyMjY4NTU1MzQzCg==
-  CLOUDINARY_SECRET: NnQ0a28xb1VWUW55MEpuTnZra19vYkRaZlVBCg==
-  MAPBOX_TOKEN: cGsuZXlKMUlqb2lhV0Z0WldabGJXVnVZU0lzSW1FaU9pSmpiV1UzTkRRNE1XMHdNSEF4TW10eU16WXhPWFV6YW5WeUluMC5tZnUtZHZVdy1FSGc2VHFNbDBfLXRnCg==
-  DB_URL: bW9uZ29kYitzcnY6Ly9pc2FhY2VmZW1lbmEyMzpQYTEyMEFFd01IY1R2WUxsQGNsdXN0ZXIwLndlajFhcm0ubW9uZ29kYi5uZXQvP3JldHJ5V3JpdGVzPXRydWUmdz1tYWpvcml0eSZhcHBOYW1lPUNsdXN0ZXIwCg==
+  CLOUDINARY_CLOUD_NAME: ZGhxdnlyMXZo
+  CLOUDINARY_KEY: MzIyNjMyMjY4NTU1MzQz
+  CLOUDINARY_SECRET: NnQ0a28xb1VWUW55MEpuTnZra19vYkRaZlVh
+  MAPBOX_TOKEN: cGsuZXlKMUlqb2lhV0Z0WldabGJXVnVZU0lzSW1FaU9pSmpiV1UzTkRRNE1XMHdNSEF4TW10eU16WXhPWFV6YW5WeUluMC5tZnUtZHZVdy1FSGc2VHFNbDBfLXRn
+  DB_URL: bW9uZ29kYitzcnY6Ly9pc2FhY2VmZW1lbmEyMzpQYTEyMEFFd01IY1R2WUxsQGNsdXN0ZXIwLndlajFhcm0ubW9uZ29kYi5uZXQvP3JldHJ5V3JpdGVzPXRydWUmdz1tYWpvcml0eSZhcHBOYW1lPUNsdXN0ZXIw
   SECRET: SWFtZWZlbWVuYQ==
 
 ---
@@ -17,6 +17,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: yelp-camp-deployment
+  namespace: webapps
 spec:
   replicas: 1
   selector:
@@ -79,6 +80,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: yelp-camp-service
+  namespace: webapps
 spec:
   selector:
     app: yelp-camp
