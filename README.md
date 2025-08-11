@@ -30,6 +30,6 @@ docker compose up
 ```
 
 ## Application Screenshots
-![](./images/home.jpg)
 ![](./images/campgrounds.jpg)
 ![](./images/register.jpg)
+<img width="948" height="453" alt="Capturejsdksdf" src="https://github.com/user-attachments/assets/2d12525f-2c20-4aa0-ac94-b33490ca850f" />
