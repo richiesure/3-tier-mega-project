@@ -1,3 +1,4 @@
+console.log('DB_URL:', process.env.DB_URL);
 if (process.env.NODE_ENV !== "production") {
     require('dotenv').config();
 }
